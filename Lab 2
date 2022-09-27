@@ -1,0 +1,149 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+public class Lab2p1 {
+ public static void main(String[] args){
+    int choice;
+    int m, n;
+    long p;
+    Scanner sc = new Scanner(System.in);
+    do {
+        System.out.println("Perform the following methods:");
+        System.out.println("1: miltiplication test");
+        System.out.println("2: quotient using division by subtraction");
+        System.out.println("3: remainder using division by subtraction");
+        System.out.println("4: count the number of digits");
+        System.out.println("5: position of a digit");
+        System.out.println("6: extract all odd digits");
+        System.out.println("7: quit");
+        choice = sc.nextInt();
+        switch (choice) {
+        case 1: multest();
+        break;
+        case 2: 
+        System.out.println("Please input 2 integers to be divided by subtraction: ");
+        m = sc.nextInt();
+        n = sc.nextInt();
+        System.out.println("\n" + m +"/"+ n + " = " + divide(m, n) + "\n");
+        break;
+        case 3: 
+        System.out.println("Please input 2 integers to obtain modulus: ");
+        m = sc.nextInt();
+        n = sc.nextInt();
+        System.out.println("\nThe modulus " + m +"%"+ n + " = " + modulus(m, n) + "\n");
+        break;
+        case 4: 
+        System.out.println("Please input an integer to obtain number of digits: ");
+        m = sc.nextInt();
+        if (m<0){
+            System.out.println("n: " + m + " - Error Input!");
+        }
+        else{
+            System.out.println("n: " + m + " - count = " + countDigits(m));
+        }
+        break;
+        case 5:
+        System.out.println("Please input an integer: ");
+        m = sc.nextInt();
+        System.out.println("Please input an digit: ");
+        n = sc.nextInt();
+        System.out.println("Digit = " + position(m, n));
+        break;
+        case 6: 
+        System.out.println("Please input an integer: ");
+        p = sc.nextLong();
+        if (p>=0){
+            System.out.println("\noddDigits = " + extractOddDigits(p) + "\n");
+        }
+        else{
+            System.out.println("\noddDigits = Error Input!!\n");
+        }
+        break; 
+        case 7: System.out.println("Program terminating ….");
+        }
+    } 
+    while (choice < 7);
+ }
+ public static void multest(){
+    Random rand = new Random();
+    Scanner sc = new Scanner(System.in);
+    final int min = 1, max = 10;
+    int answer, correct=0;
+    for (int i = 0; i<5; i++){
+        int var1 = rand.nextInt((max-min)+1)+ min;
+        int var2 = rand.nextInt((max-min)+1)+ min;
+        System.out.println("\nHow much is " + var1 + " times " + var2 + "?: ");
+        answer = sc.nextInt();
+        if (answer == var1*var2){
+            correct++;
+        }
+    }
+    System.out.println("\n" + correct + " out of 5 answers are correct.\n");
+ }
+
+ public static int divide(int m, int n){
+    if (m>=n){
+        int diff = m, counter=0;
+        while (diff-n>=0){
+            counter++;
+            diff = diff-n;
+        }
+        return counter;
+    }
+    else{
+        return 0;
+    }
+ }
+ public static int modulus(int m, int n){
+    if (m>=n){
+        int diff = m;
+        while (diff-n>=0){
+            diff = diff-n;
+        }
+        return diff;
+    }
+    else{
+        return m;
+    }
+ }
+public static int countDigits(int n){
+    String str = String.valueOf(n);
+    return str.length();
+}
+public static int position(int n, int digit){
+    String str = String.valueOf(n);
+    String str2 = String.valueOf(digit);
+    String str3 = new StringBuilder(str).reverse().toString();
+    for (int i = 0; i<str3.length(); i++){
+        if (str3.charAt(i) == str2.charAt(0)){
+        return i+1;
+        }
+    }
+    return -1;
+}
+public static long extractOddDigits(long n){
+    String str = Long.toString(n), str2;
+    int integer;
+    List<Integer> num = new ArrayList<Integer>();
+    for (int i = 0; i<str.length();i++){
+        str2 = String.valueOf(str.charAt(i));
+        integer = Integer.parseInt(str2);
+        if (integer%2 !=0 ){
+            num.add(integer);
+        }
+    }
+    if (num.isEmpty() == true){
+        return -1;
+    }
+    else{
+        String str3 = num.toString();
+        str3 = str3.replace("[", "");
+        str3 = str3.replace("]", "");
+        str3 = str3.replace(",", "");
+        str3 = str3.replace(" ", "");
+        long l = Long.parseLong(str3);
+        return l;
+    }
+}
+}
