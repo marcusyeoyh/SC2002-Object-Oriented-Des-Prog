@@ -57,7 +57,7 @@ protected:
 class Mammal : public Animal
 {
 public:
-    void eat() const
+    virtual void eat()
     {
         cout << "Mammal eat " << endl;
     }
@@ -107,6 +107,9 @@ public:
     {
         cout << "Dog moves" << endl;
     }
+    void eat(){
+        cout << "Dog eats" << endl;
+    }
 };
 
 class Cat : public Mammal
@@ -133,6 +136,9 @@ public:
     {
         cout << "Cat moves" << endl;
     }
+    void eat(){
+        cout << "Cat eats" << endl;
+    }
 };
 
 class Lion : public Mammal
@@ -158,6 +164,9 @@ public:
     void move()
     {
         cout << "Lion moves" << endl;
+    }
+    void eat(){
+        cout << "Lion eats" << endl;
     }
 };
 
@@ -198,6 +207,7 @@ int main()
         for(int i = 0; i<Arraycount; i++){
             zoo[i]->speak();
             zoo[i]->move();
+            zoo[i]->eat();
         }
         break;
         case 5:
