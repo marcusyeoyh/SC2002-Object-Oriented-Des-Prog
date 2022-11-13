@@ -1,0 +1,5 @@
+OCCASION|DATE
+xmas day|25-12
+new year|01-01
+valentine's day|14-02
+tea day|08-02
